@@ -1,13 +1,22 @@
+import os 
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-SQLALCHEMY_DATABASE_URL = ""
+load_dotenv()
+
+PASSWORD = os.getenv('PASSWORD')
+USER = os.getenv('USER')
+PORT = os.getenv('PORT')
+DATABASE = os.getenv('DATABASE')
+HOST = os.getenv('HOST')
+DATABASE_URL = f'postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}'
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, 
-    connect_args={"check_same_thread": False}
+    DATABASE_URL, 
+    connect_args={'check_same_thread': False}
 )
 
 SessionLocal = sessionmaker(
