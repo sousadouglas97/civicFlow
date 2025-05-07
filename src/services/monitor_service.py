@@ -8,6 +8,11 @@ class MonitorService:
         self.ultima_data = datetime.now().strftime('%d-%m-%Y')  
         self.ultima_hora = datetime.now().strftime("%H:%M:%S")
     
+        
+    async def processar_movimentacoes(self, mov):
+        print(mov)
+        return await mov
+    
     
     async def monitorar_movimentacoes(self):
         while True:
@@ -21,9 +26,5 @@ class MonitorService:
     
                 await self.processar_movimentacoes(novas_movimentacoes)
             
-            await asyncio.sleep(3600)
-    
-    
-    async def processar_movimentacoes(self, movimentacoes):
-        pass            
+            await asyncio.sleep(30)
     

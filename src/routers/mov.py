@@ -1,9 +1,9 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from src.services.monitor_service import buscar_novas_movimentacoes
 
 
-app = FastAPI()
+router = APIRouter()
 
-@app.get("/ultimas-movimentacoes")
+@router.get("/ultimas-movimentacoes")
 async def get_ultimas_movimentacoes():
     return await buscar_novas_movimentacoes()
