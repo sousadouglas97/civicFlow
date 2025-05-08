@@ -1,15 +1,10 @@
-import asyncio
 from fastapi import FastAPI
-from src.services.monitor_service import MonitorService
-from src.routers import mov
-
+from src.routers import monitor_router
 
 app = FastAPI()
-monitor_service = MonitorService()
 
-@app.on_event("startup")
-async def startup_event():
-    # Inicia o monitoramento em background
-    asyncio.create_task(monitor_service.monitorar_movimentacoes())
+app.include_router(monitor_router.router, prefix="/api/v1")
 
-app.include_router(mov.router)
+@app.get("/")
+async def root():
+    return {"message": "Sistema de monitoramento de processos"}

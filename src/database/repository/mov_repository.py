@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.database.config.connect import engine
 
 
-async def buscar_novas_movimentacoes(ultima_data: date, ultimo_horario: time):
+async def buscar_novas_movimentacoes(ultima_data: date, ultimo_horario: str):
       async with AsyncSession(engine) as conn:
         async with conn.begin():
           result = await conn.execute(text("""
@@ -47,8 +47,8 @@ async def buscar_novas_movimentacoes(ultima_data: date, ultimo_horario: time):
                       INNER JOIN fase_processual fp ON (m.id_fase_processual = fp.id)
                   WHERE
                       -- Filtra por data e hora da movimentação
-                      (p.data_ultima_movimentacao > :ultima_data OR 
-                      (p.data_ultima_movimentacao = :ultima_data AND m.horario > :ultimo_horario))
+                      (t."data" > :ultima_data OR 
+                      (t."data" = :ultima_data AND m.horario > :ultimo_horario))
                   ORDER BY p.data_ultima_movimentacao DESC, m.horario DESC;
               """), {'ultima_data': ultima_data, 'ultimo_horario': ultimo_horario})
           

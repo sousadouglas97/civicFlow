@@ -3,27 +3,19 @@ name = "civicflow"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Douglas da Silva Sousa",email = "douglas.sousa@tre-ap.jus.br"}
+    {name = "Your Name",email = "you@example.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "pandas (>=2.2.3,<3.0.0)",
-    "numpy (>=2.2.5,<3.0.0)",
-    "fastapi[standard] (>=0.115.12,<0.116.0)",
-    "sqlalchemy (>=2.0.40,<3.0.0)",
+    "fastapi (>=0.115.12,<0.116.0)",
     "python-dotenv (>=1.1.0,<2.0.0)",
-    "asyncio (>=3.4.3,<4.0.0)",
-    "psycopg2-binary (>=2.9.10,<3.0.0)",
+    "sqlalchemy (>=2.0.40,<3.0.0)",
+    "asyncpg (>=0.30.0,<0.31.0)",
+    "pytz (>=2025.2,<2026.0)",
 ]
 
-[tool.poetry.dev-dependencies]
-pytest = "^6.2.4"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-
-[tool.poetry.packages]
-include = [{include = "src", from = "."}]
